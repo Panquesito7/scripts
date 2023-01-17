@@ -1,8 +1,5 @@
 name: Test with ignore directory argument
-on:
-  push:
-    branches:
-      - 'main'
+on: [push]
 jobs:
   formatter:
     runs-on: ubuntu-latest
