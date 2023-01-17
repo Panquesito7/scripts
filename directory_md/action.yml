@@ -36,6 +36,7 @@ runs:
       run: |
         python3 ./build_directory_md.py ${{ inputs.language }} ${{ inputs.working-directory }} ${{ inputs.filetypes }} ${{ inputs.ignored-directories }} ${{ inputs.ignore-folders-children }} > DIRECTORY.md
     - name: Push changes
+      shell: bash
       run: |
         git commit -m "updating DIRECTORY.md" DIRECTORY.md || true
         git push origin HEAD:$GITHUB_REF || true
