@@ -26,10 +26,12 @@ runs:
         git pull || true
         git checkout -b file_formatting
     - name: Running the formatter
+      id: formatter
       shell: bash
       run: |
         ./filename_formatter.sh ${{ inputs.working-directory }} ${{ inputs.filetypes }} ${{ inputs.ignore-files }}
     - name: Committing changes
+      if: steps.formatter.outputs.changes_detected == 'true'
       shell: bash
       run: |
         git add ${{ inputs.working-directory }} || true
