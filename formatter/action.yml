@@ -34,7 +34,6 @@ runs:
         git add ${{ inputs.working-directory }} || true
         git commit -m "chore: formatting filenames" || true
     - name: Pushing and creating a PR
-      if: steps.formatter.outputs.changes_detected == 'true'
       shell: bash
       run: |
         git push origin file_formatting || true
