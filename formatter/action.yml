@@ -24,6 +24,7 @@ runs:
         git config --global user.email 'github-actions@users.noreply.github.com'
 
         # Create a new branch to create a pull request.
+        git config pull.ff only
         git pull https://github.com/${GITHUB_REPOSITORY}/
         git checkout -b file_formatting
     - name: Running the formatter
