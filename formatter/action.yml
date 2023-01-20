@@ -30,13 +30,13 @@ runs:
       shell: bash
       run: |
         ./filename_formatter.sh ${{ inputs.working-directory }} ${{ inputs.filetypes }} ${{ inputs.ignore-files }}
-    - name: Committing changes
+
+        git add ${{ inputs.working-directory }} || true
+        git commit -m "chore: formatting filenames" || true
+    - name: Pushing and creating a PR
       if: steps.formatter.outputs.changes_detected == 'true'
       shell: bash
       run: |
-        git add ${{ inputs.working-directory }} || true
-        git commit -m "chore: formatting filenames" || true
-
         git push origin file_formatting || true
         gh pr create --base ${GITHUB_REF##*/} --head file_formatting --title 'chore: formatting filenames' --body 'Formatted filenames (see the diff. for changes).'
       env:
