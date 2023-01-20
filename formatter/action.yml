@@ -36,4 +36,4 @@ runs:
         git commit -m "chore: formatting filenames" || true
 
         git push origin file_formatting || true
-        git request-pull HEAD:$GITHUB_REF https://github.com/${{ github.repository }} file_formatting
+        git request-pull ${GITHUB_REF##*/} https://github.com/${{ github.repository }} file_formatting
