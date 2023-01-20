@@ -35,7 +35,7 @@ runs:
         git commit -m "chore: formatting filenames" || true
 
         git push origin file_formatting || true
-        gh pr create --base ${GITHUB_REF##*/} --head file_formatting --title 'chore: formatting filenames' --body
+        gh pr create --base ${GITHUB_REF##*/} --head file_formatting --title 'chore: formatting filenames' --body |
         '
           Things added/changed:
           
