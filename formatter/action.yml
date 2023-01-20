@@ -24,6 +24,7 @@ runs:
         git config --global user.email 'github-actions@users.noreply.github.com'
 
         # Create a new branch to create a pull request.
+        git pull https://github.com/${GITHUB_REPOSITORY##*/}/tree/${GITHUB_REF##*/}
         git checkout -b file_formatting
     - name: Running the formatter
       shell: bash
@@ -36,4 +37,4 @@ runs:
         git commit -m "chore: formatting filenames" || true
 
         git push origin file_formatting || true
-        git request-pull ${GITHUB_REF##*/} https://github.com/${{ github.repository }} file_formatting
+        git request-pull ${GITHUB_REF##*/} https://github.com/${GITHUB_REPOSITORY##*/} file_formatting
