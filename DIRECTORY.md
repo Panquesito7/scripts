@@ -1,3 +1,3 @@
 
 ## Test
-  * [Some File](https://github.com/TheAlgorithms/scripts/blob/HEAD/test/SOME%20FILE.cpp)
+  * [Some File](https://github.com/TheAlgorithms/scripts/blob/HEAD/test/some_file.cpp)
