@@ -23,6 +23,7 @@ runs:
         git config --global user.name github-actions[bot]
         git config --global user.email 'github-actions@users.noreply.github.com'
 
+        git pull || true
         git checkout -b file_formatting
     - name: Running the formatter
       shell: bash
@@ -36,3 +37,5 @@ runs:
 
         git push origin file_formatting || true
         gh pr create --base ${GITHUB_REF##*/} --head file_formatting --title 'chore: formatting filenames' --body 'Formatted filenames (see the diff. for changes).'
+      env:
+        GH_TOKEN: ${{ github.token }}
