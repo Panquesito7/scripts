@@ -23,13 +23,14 @@ runs:
         ./filename_formatter.sh ${{ inputs.working-directory }} ${{ inputs.filetypes }} ${{ inputs.ignore-files }}
 
         git pull || true
+        git checkout -b file_formatting
     - name: Committing and pushing changes
       uses: stefanzweifel/git-auto-commit-action@v4
       id: commit-push
       with:
         commit_message: "chore: formatting filenames"
         branch: file_formatting
-        create_branch: true
+        create_branch: false
     - name: Creating and merging the PR
       shell: bash
       if: steps.commit-push.outputs.changes_detected == 'true'
