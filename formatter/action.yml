@@ -25,12 +25,12 @@ runs:
         git pull || true
         git checkout ${ GITHUB_REF_NAME }
     - name: Committing and pushing changes
-      id: commit-push
       uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit-message: "chore: formatting filenames"
-          branch: file_formatting
-          create_branch: true
+      id: commit-push
+      with:
+        commit-message: "chore: formatting filenames"
+        branch: file_formatting
+        create_branch: true
     - name: Creating and merging the PR
       shell: bash
       if: steps.commit-push.outputs.changes_detected == 'true'
