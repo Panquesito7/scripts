@@ -42,8 +42,8 @@ runs:
     - name: Creating a branch
       shell: bash
       run: |
-        git branch directory-update
-        git checkout directory-update
+        git branch directory-update || true
+        git checkout directory-update || true
 
     - name: Committing, pushing, and creating a PR
       shell: bash
