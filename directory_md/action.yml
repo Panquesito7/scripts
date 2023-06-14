@@ -41,11 +41,15 @@ runs:
       run: |
         git branch directory-update
         git checkout directory-update
+        
+        git add DIRECTORY.md
 
-        git commit -m "docs: update `DIRECTORY.md`" DIRECTORY.md || true
+        git commit -m "docs: update `DIRECTORY.md`" || true
         git push origin directory-update:directory-update --force
     - name: Creating a pull request
       shell: bash
       run: |
           if [[ `git status --porcelain` ]]; then
           gh pr create --base ${GITHUB_REF##*/} --head directory-update --title 'docs: updating `DIRECTORY.md`' --body 'Updated the `DIRECTORY.md` file (see the diff. for changes).'
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
