@@ -42,7 +42,7 @@ runs:
         git branch directory-update
         git checkout directory-update
 
-    - name: Committing and pushing changes
+    - name: Committing, pushing, and creating a PR
       shell: bash
       run: |
         if [[ `git status --porcelain` ]];
@@ -52,11 +52,9 @@ runs:
 
           git commit -m "docs: update `DIRECTORY.md`" || true
           git push origin directory-update:directory-update --force
-        fi
-    - name: Creating a pull request
-      shell: bash
-      run: |
+
           gh pr create --base ${GITHUB_REF##*/} --head directory-update --title 'docs: updating `DIRECTORY.md`' --body 'Updated the `DIRECTORY.md` file (see the diff. for changes).' || true
           # Using `true` will make sure no errors are displayed even if there's a PR created.
+        fi
       env:
         GH_TOKEN: ${{ github.token }}
