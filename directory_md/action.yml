@@ -45,13 +45,18 @@ runs:
     - name: Committing and pushing changes
       shell: bash
       run: |
-        git add DIRECTORY.md
+        if [[ `git status --porcelain` ]];
+        then
 
-        git commit -m "docs: update `DIRECTORY.md`" || true
-        git push origin directory-update:directory-update --force
+          git add DIRECTORY.md
+
+          git commit -m "docs: update `DIRECTORY.md`" || true
+          git push origin directory-update:directory-update --force
+        fi
     - name: Creating a pull request
       shell: bash
       run: |
           gh pr create --base ${GITHUB_REF##*/} --head directory-update --title 'docs: updating `DIRECTORY.md`' --body 'Updated the `DIRECTORY.md` file (see the diff. for changes).' || true
+          # Using `true` will make sure no errors are displayed even if there's a PR created.
       env:
         GH_TOKEN: ${{ github.token }}
