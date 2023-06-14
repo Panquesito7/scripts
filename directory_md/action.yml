@@ -50,7 +50,8 @@ runs:
       shell: bash
       run: |
           if [[ `git status --porcelain` ]];
-          gh pr create --base ${GITHUB_REF##*/} --head directory-update --title 'docs: updating `DIRECTORY.md`' --body 'Updated the `DIRECTORY.md` file (see the diff. for changes).' || true
-          fi;
+          then
+              gh pr create --base ${GITHUB_REF##*/} --head directory-update --title 'docs: updating `DIRECTORY.md`' --body 'Updated the `DIRECTORY.md` file (see the diff. for changes).' || true
+          fi
       env:
         GH_TOKEN: ${{ github.token }}
